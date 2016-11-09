@@ -7,18 +7,34 @@
 #include "../objects/ObjectParticleBall.h"
 #include "../globals.h"
 
-sf::Color random_color(){
-    
 
-}
 
 StateGame::StateGame() {
-    for (int i = 0; i < 100; i++){
-        ObjectList.push_front(new ObjectParticleBall(sf::Vector2f(rand()%global_game_resources->getWindow()->getSize().x-10,rand()%global_game_resources->getWindow()->getSize().y-10), 5));
-        ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
-        ObjectList.front()->setSpeed(sf::Vector2f((rand()%40)-20,(rand()%40)-20));
-//        ObjectList.front()->setSpeed(sf::Vector2f(1,1));
-    }
+//    for (int i = 0; i < 50; i++){
+//        ObjectList.push_front(new ObjectParticleBall(sf::Vector2f(rand()%global_game_resources->getWindow()->getSize().x-10,rand()%global_game_resources->getWindow()->getSize().y-10), 5));
+//        ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
+//        ObjectList.front()->setSpeed(sf::Vector2f((rand()%40)-20,0));
+////        ObjectList.front()->setSpeed(sf::Vector2f(1,1));
+//    }
+
+    ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2) -100, global_game_resources->getWindow()->getSize().y/2), 5));
+    ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
+    ObjectList.front()->setSpeed(sf::Vector2f(10,0));
+
+    ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2) +100,global_game_resources->getWindow()->getSize().y/2), 5));
+    ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
+    ObjectList.front()->setSpeed(sf::Vector2f(-10,0));
+
+
+//    ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2),(global_game_resources->getWindow()->getSize().y/2)+100), 5));
+//    ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
+//    ObjectList.front()->setSpeed(sf::Vector2f(0,-10));
+//
+//    ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2),(global_game_resources->getWindow()->getSize().y/2)-100), 5));
+//    ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
+//    ObjectList.front()->setSpeed(sf::Vector2f(0,11));
+
+
 }
 
 

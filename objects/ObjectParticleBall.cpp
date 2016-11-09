@@ -59,6 +59,21 @@ void ObjectParticleBall::proximityControl(ObjectInterface *test_object) {
     float distance = vm::distance<float>(getCenterPosition(), test_object->getCenterPosition());
 
     if (distance < 100){
+        // Position of object in proximity
+        sf::Vector2f test_pos = test_object->getCenterPosition();
+
+        // Position of self
+        sf::Vector2f this_pos = getCenterPosition();
+
+        // Speed modifier
+        sf::Vector2f speed_modifier = getCenterPosition();
+
+        float flipped_distance = (100 - distance) / 1000;
+        speed_modifier.x *= flipped_distance;
+        speed_modifier.y *= flipped_distance;
+
+
+        setSpeed(getSpeed()+speed_modifier);
 
     }
 
