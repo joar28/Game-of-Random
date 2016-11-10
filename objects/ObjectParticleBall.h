@@ -23,6 +23,9 @@ public:
     void setRadius(float radius);
 
 private:
+    void type_1(ObjectInterface *test_object);
+    void type_2(ObjectInterface *test_object);
+    int behavior;
 
 };
 

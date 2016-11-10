@@ -10,6 +10,8 @@ ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius) {
     setShape(new sf::CircleShape(radius));
     ((sf::CircleShape*)getShape())->setPosition(position);
     setShape_type(shape_circle);
+
+    behavior = 1;
 }
 
 void ObjectParticleBall::draw(sf::RenderWindow &window) {
@@ -54,17 +56,16 @@ void ObjectParticleBall::setRadius(float radius) {
     ((sf::CircleShape*)getShape())->setRadius(radius);
 }
 
-void ObjectParticleBall::proximityControl(ObjectInterface *test_object) {
 
+void ObjectParticleBall::type_1(ObjectInterface *test_object) {
     float distance = vm::distance<float>(getCenterPosition(), test_object->getCenterPosition());
-
     if (distance < 100){
         // Position of object in proximity
-        sf::Vector2f test_pos = test_object->getCenterPosition();
+        // sf::Vector2f test_pos = test_object->getCenterPosition();
         sf::Vector2f test_speed = test_object->getSpeed();
 
         // Position of self
-        sf::Vector2f this_pos = getCenterPosition();
+        // sf::Vector2f this_pos = getCenterPosition();
         sf::Vector2f this_speed = getSpeed();
 
         if(getSpeed().x > 100){
@@ -85,5 +86,42 @@ void ObjectParticleBall::proximityControl(ObjectInterface *test_object) {
         //setSpeed(getSpeed()-speed_modifier);
 
     }
+}
+void ObjectParticleBall::type_2(ObjectInterface *test_object) {
+    float distance = vm::distance<float>(getCenterPosition(), test_object->getCenterPosition());
+    if (distance < 100){
+        // Position of object in proximity
+        // sf::Vector2f test_pos = test_object->getCenterPosition();
+        sf::Vector2f test_speed = test_object->getSpeed();
 
+        // Position of self
+        // sf::Vector2f this_pos = getCenterPosition();
+        sf::Vector2f this_speed = getSpeed();
+
+        if(vm::speed<float>(this_speed) > 100){
+            this_speed.x = (rand()%20)/10;
+            this_speed.y = (rand()%20)/10;
+            setSpeed(this_speed);
+        }
+
+
+        // Speed modifier
+        sf::Vector2f speed_modifier = sf::Vector2f(this_speed.x/100, this_speed.y/100);
+
+        test_object->setSpeed(test_speed+speed_modifier);
+
+        //setSpeed(getSpeed()-speed_modifier);
+
+    }
+}
+
+
+void ObjectParticleBall::proximityControl(ObjectInterface *test_object) {
+
+
+    if (behavior == 1){
+        type_1(test_object);
+    }else if (behavior == 1){
+        type_1(test_object);
+    }
 }

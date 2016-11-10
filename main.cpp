@@ -8,7 +8,7 @@
 
 int main() {
   std::cout << "Starting Game of Random" << std::endl;
-
+  srand((uint32_t)time(NULL));
   Game game;
 
   if (!game.Init()) {

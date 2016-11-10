@@ -12,7 +12,7 @@
 StateGame::StateGame() {
     int speed = 5;
 
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 20; i++){
         ObjectList.push_front(new ObjectParticleBall(sf::Vector2f(rand()%global_game_resources->getWindow()->getSize().x-10,rand()%global_game_resources->getWindow()->getSize().y-10), 5));
         ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
         ObjectList.front()->setSpeed(sf::Vector2f((rand()%speed*2)-speed,(rand()%speed*2)-speed));
@@ -37,8 +37,6 @@ StateGame::StateGame() {
     ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
     ObjectList.front()->setSpeed(sf::Vector2f(0,10));
 */
-
-
 }
 
 
@@ -46,11 +44,9 @@ void StateGame::Draw(sf::RenderWindow &window) {
     for(auto& object : this->ObjectList){
         object->draw(window);
     }
-
 }
 
 void StateGame::Process(sf::Time DeltaTime) {
-
     for(auto &object : this->ObjectList){
         for(auto &inner_object : this->ObjectList){
             if(object != inner_object){
@@ -58,12 +54,9 @@ void StateGame::Process(sf::Time DeltaTime) {
             }
         }
     }
-
-
     for(auto &object : this->ObjectList){
         object->process(DeltaTime);
     }
-
 }
 
 StateInterface::StateSwitcherData *StateGame::NextState() {
@@ -71,5 +64,10 @@ StateInterface::StateSwitcherData *StateGame::NextState() {
 }
 
 void StateGame::Event(sf::Event *event) {
+
+/*    switch (){
+
+    }*/
+
 
 }
