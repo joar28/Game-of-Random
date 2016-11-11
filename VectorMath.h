@@ -13,13 +13,13 @@
 namespace vm {
 
     template<class T>
-    T distance(sf::Vector2f a, sf::Vector2f b) {
-        sf::Vector2f tmp = a-b;
+    T distance(sf::Vector2<T> a, sf::Vector2<T> b) {
+        sf::Vector2<T> tmp = a-b;
         return (T)sqrt((tmp.x*tmp.x + tmp.y*tmp.y));
     }
 
     template<class T>
-    T speed(sf::Vector2f speed){
+    T speed(sf::Vector2<T> speed){
         return (T)sqrt((speed.x*speed.x + speed.y*speed.y));
     }
 }

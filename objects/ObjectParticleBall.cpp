@@ -6,7 +6,9 @@
 #include "../globals.h"
 #include "../VectorMath.h"
 
-ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius) {
+
+
+ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius, int type) {
     setShape(new sf::CircleShape(radius));
     ((sf::CircleShape*)getShape())->setPosition(position);
     setShape_type(shape_circle);
@@ -87,8 +89,9 @@ void ObjectParticleBall::type_1(ObjectInterface *test_object) {
 
     }
 }
+
 void ObjectParticleBall::type_2(ObjectInterface *test_object) {
-    float distance = vm::distance<float>(getCenterPosition(), test_object->getCenterPosition());
+    float distance = vm::distance(getCenterPosition(), test_object->getCenterPosition());
     if (distance < 100){
         // Position of object in proximity
         // sf::Vector2f test_pos = test_object->getCenterPosition();
@@ -121,7 +124,7 @@ void ObjectParticleBall::proximityControl(ObjectInterface *test_object) {
 
     if (behavior == 1){
         type_1(test_object);
-    }else if (behavior == 1){
-        type_1(test_object);
+    }else if (behavior == 2){
+        type_2(test_object);
     }
 }

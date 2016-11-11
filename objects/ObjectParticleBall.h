@@ -10,7 +10,9 @@
 
 class ObjectParticleBall : public ObjectInterface{
 public:
-    ObjectParticleBall(sf::Vector2f position, float radius);
+
+
+    ObjectParticleBall(sf::Vector2f position, float radius, int type);
 
     virtual void proximityControl(ObjectInterface *test_object) override;
 

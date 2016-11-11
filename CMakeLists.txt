@@ -22,7 +22,8 @@ set(SOURCE_FILES
 add_executable(game_of_random ${SOURCE_FILES})
 
 target_link_libraries (game_of_random
-        jsoncpp
+        #jsoncpp
+        lua5.3
         sfml-system
         sfml-window
         sfml-graphics
