@@ -16,7 +16,7 @@ set(SOURCE_FILES
         states/StateMainMenu.cpp states/StateMainMenu.h
         states/StateGame.cpp states/StateGame.h
 
-        objects/ObjectInterface.cpp objects/ObjectInterface.h objects/ObjectParticleBall.cpp objects/ObjectParticleBall.h VectorMath.cpp VectorMath.h)
+        objects/ObjectInterface.cpp objects/ObjectInterface.h objects/ObjectParticleBall.cpp objects/ObjectParticleBall.h VectorMath.cpp VectorMath.h lua.cpp lua.h)
 
 
 add_executable(game_of_random ${SOURCE_FILES})
