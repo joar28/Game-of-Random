@@ -31,7 +31,7 @@ bool Game::Init(){
     global_game_resources = new ResourceLoader;
     global_game_resources->setWindow(&window);
 
-    if(false == global_game_resources->LoadResources()){
+    if(!global_game_resources->LoadResources()){
         return false;
     }
     //next_state_data = new StateInterface::StateSwitcherData;

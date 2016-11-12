@@ -48,6 +48,10 @@ void ObjectParticleBall::process(sf::Time time) {
         setPosition(sf::Vector2f(getPosition().x, 0));
     }
 
+    if(vm::speed<float>(getSpeed()) > 200){
+        setSpeed(sf::Vector2f((rand()%20)/10, (rand()%20)/10));
+    }
+
 }
 
 float ObjectParticleBall::getRadius() const {
@@ -101,11 +105,6 @@ void ObjectParticleBall::type_2(ObjectInterface *test_object) {
         // sf::Vector2f this_pos = getCenterPosition();
         sf::Vector2f this_speed = getSpeed();
 
-        if(vm::speed<float>(this_speed) > 100){
-            this_speed.x = (rand()%20)/10;
-            this_speed.y = (rand()%20)/10;
-            setSpeed(this_speed);
-        }
 
 
         // Speed modifier
@@ -121,10 +120,11 @@ void ObjectParticleBall::type_2(ObjectInterface *test_object) {
 
 void ObjectParticleBall::proximityControl(ObjectInterface *test_object) {
 
-
-    if (behavior == 1){
-        type_1(test_object);
-    }else if (behavior == 2){
-        type_2(test_object);
+    if(test_object->getShape_type() == ObjectInterface::ShapeType::shape_circle){
+        if (behavior == 1){
+            type_1(test_object);
+        }else if (behavior == 2){
+            type_2(test_object);
+        }
     }
 }

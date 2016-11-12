@@ -44,10 +44,10 @@ void ObjectInterface::setPosition(const sf::Vector2f &position) {
     shape->setPosition(position);
 }
 
-void ObjectInterface::setShape_type(ShapeType shape_type) {
+void ObjectInterface::setShape_type(ObjectInterface::ShapeType shape_type) {
     ObjectInterface::shape_type = shape_type;
 }
 
-ShapeType ObjectInterface::getShape_type() const {
+ObjectInterface::ShapeType ObjectInterface::getShape_type() const {
     return shape_type;
 }

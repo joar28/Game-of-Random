@@ -6,7 +6,7 @@
 #include "StateGame.h"
 #include "../objects/ObjectParticleBall.h"
 #include "../globals.h"
-
+#include "../objects/ObjectNewParticleLine.h"
 
 
 StateGame::StateGame() {
@@ -78,8 +78,8 @@ void StateGame::Event(sf::Event *event) {
         case sf::Event::KeyReleased:break;
         case sf::Event::MouseWheelMoved:break;
         case sf::Event::MouseWheelScrolled:break;
-        case sf::Event::MouseButtonPressed:break;
-        case sf::Event::MouseButtonReleased:break;
+        case sf::Event::MouseButtonPressed:  MouseButtonPressed(event);  break;
+        case sf::Event::MouseButtonReleased: MouseButtonReleased(event); break;
         case sf::Event::MouseMoved:break;
         case sf::Event::MouseEntered:break;
         case sf::Event::MouseLeft:break;
@@ -93,5 +93,45 @@ void StateGame::Event(sf::Event *event) {
         case sf::Event::TouchEnded:break;
         case sf::Event::SensorChanged:break;
         case sf::Event::Count:break;
+    }
+}
+
+void StateGame::MouseButtonPressed(sf::Event *event) {
+    if(event->MouseLeft){
+        first_mouse_release = false;
+        sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
+        mouse_last_pressed = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
+
+        ObjectList.push_front(new ObjectNewParticleLine(mouse_pos));
+        mouse_pos -= sf::Vector2f(5.f, 5.f);
+
+        ObjectList.push_front(new ObjectParticleBall(mouse_pos, 5, 2));
+        ObjectList.front()->getShape()->setFillColor(sf::Color::Blue);
+
+    }
+}
+
+void StateGame::MouseButtonReleased(sf::Event *event) {
+    if(!first_mouse_release){
+
+        if(event->MouseLeft){
+            ObjectList.front()->setSpeed(mouse_last_pressed - sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow())));
+
+            ObjectInterface* objectDelete = nullptr;
+            bool finnished = true;
+            while(finnished){
+
+                for(auto &object : this->ObjectList){
+                    if(object->getShape_type() == ObjectInterface::ShapeType::shape_line){
+                        objectDelete = object;
+                        object->~ObjectInterface();
+                        break;
+                    }
+                    finnished = false;
+                }
+                ObjectList.remove(objectDelete);
+
+            }
+        }
     }
 }

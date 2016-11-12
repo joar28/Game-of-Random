@@ -24,6 +24,13 @@ public:
 
 private:
     std::list<ObjectInterface*> ObjectList;
+
+    void MouseButtonPressed(sf::Event *event);
+
+    void MouseButtonReleased(sf::Event *event);
+
+    sf::Vector2f mouse_last_pressed;
+    bool first_mouse_release;
 };
 
 

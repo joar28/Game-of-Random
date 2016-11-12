@@ -8,13 +8,19 @@
 
 #include <SFML/Graphics.hpp>
 
-enum ShapeType{
-    shape_circle
-};
+/*
+virtual void setTexture(sf::Texture*);
+
+
+ */
+
 
 class ObjectInterface{
-
 public:
+    ~ObjectInterface(){};
+    enum ShapeType{
+        shape_circle, shape_line
+    };
 
     virtual void draw(sf::RenderWindow &) = 0;
     virtual void process(sf::Time time) = 0;
@@ -24,7 +30,7 @@ public:
     const sf::Vector2f &getSpeed() const;
     const sf::Vector2f &getSize() const;
     const sf::Vector2f &getPosition() const;
-    ShapeType getShape_type() const;
+    ObjectInterface::ShapeType getShape_type() const;
 
     const sf::Vector2f getCenterPosition() const;
     void setShape(sf::Shape *shape);
@@ -34,7 +40,7 @@ public:
     void setPosition(const sf::Vector2f &position);
 
 protected:
-    void setShape_type(ShapeType shape_type);
+    void setShape_type(ObjectInterface::ShapeType shape_type);
 
 private:
     ShapeType shape_type;
@@ -44,10 +50,5 @@ private:
 
 
 };
-/*
-virtual void setTexture(sf::Texture*);
-
-
- */
 
 #endif //GAME_OF_RANDOM_OBJECTINTERFACE_H
