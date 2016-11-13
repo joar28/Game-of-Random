@@ -9,4 +9,5 @@
 
 extern ResourceLoader* global_game_resources;
 
+
 #endif //GAME_OF_RANDOM_GLOBALS_H

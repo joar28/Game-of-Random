@@ -9,6 +9,7 @@
 #include "StateInterface.h"
 #include "../objects/ObjectInterface.h"
 #include <list>
+#include <functional>
 
 class StateGame : public StateInterface{
 public:
@@ -31,6 +32,14 @@ private:
 
     sf::Vector2f mouse_last_pressed;
     bool first_mouse_release;
+
+    void KeyPressed(sf::Event *event);
+
+    void KeyReleased(sf::Event *event);
+
+    void add_button(std::string text, std::function<int()> cb);
+
+    int callback_typ();
 };
 
 

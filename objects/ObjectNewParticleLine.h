@@ -18,6 +18,8 @@ public:
 
     virtual void proximityControl(ObjectInterface *test_object) override;
 
+    virtual ~ObjectNewParticleLine();
+
 private:
     sf::Vertex line[2];
 };

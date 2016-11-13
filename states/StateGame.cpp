@@ -7,27 +7,36 @@
 #include "../objects/ObjectParticleBall.h"
 #include "../globals.h"
 #include "../objects/ObjectNewParticleLine.h"
+#include "../objects/ObjectLeftSideBar.h"
+#include "../objects/ObjectButton.h"
 
 
 StateGame::StateGame() {
     int speed = 5;
-
-    for (int i = 0; i < 20; i++){
+    ObjectList.push_front(new ObjectLeftSideBar(global_game_resources->getLeft_side_bar_size()));
+    add_button("Typ", std::bind(&StateGame::callback_typ, this));
+//    add_button("asd");
+//    add_button("czxcv");
+    for (int i = 0; i < 10; i++){
         ObjectList.push_front(new ObjectParticleBall(
-                sf::Vector2f(rand() % global_game_resources->getWindow()->getSize().x - 10,
-                             rand() % global_game_resources->getWindow()->getSize().y - 10), 5, 2));
+                sf::Vector2f(
+                        rand() % global_game_resources->getWindow()->getSize().x - 10,
+                        rand() % global_game_resources->getWindow()->getSize().y - 10),
+                5, 2));
         ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
         ObjectList.front()->setSpeed(sf::Vector2f((rand()%speed*2)-speed,(rand()%speed*2)-speed));
 //        ObjectList.front()->setSpeed(sf::Vector2f(1,1));
     }
 
-/*    ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2) -100, global_game_resources->getWindow()->getSize().y/2), 5));
+/*
+    ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2) -100, global_game_resources->getWindow()->getSize().y/2), 5));
     ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
     ObjectList.front()->setSpeed(sf::Vector2f(10,2));
 
     ObjectList.push_front(new ObjectParticleBall(sf::Vector2f((global_game_resources->getWindow()->getSize().x/2) +100,global_game_resources->getWindow()->getSize().y/2), 5));
     ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
-    ObjectList.front()->setSpeed(sf::Vector2f(-10,0));*/
+    ObjectList.front()->setSpeed(sf::Vector2f(-10,0));
+*/
 
 /*
 
@@ -42,6 +51,18 @@ StateGame::StateGame() {
 
 }
 
+void StateGame::add_button(std::string text, std::function<int()> cb) {
+    static int next_button_pos = 10;
+    ObjectList.push_back(new ObjectButton(sf::Vector2f(10, next_button_pos),
+                                          text,
+                                          cb));
+    next_button_pos += 40;
+}
+
+int StateGame::callback_typ(){
+    std::cout << "Typ button pressed" << std::endl;
+    return 0;
+}
 
 void StateGame::Draw(sf::RenderWindow &window) {
     for(auto& object : this->ObjectList){
@@ -74,8 +95,8 @@ void StateGame::Event(sf::Event *event) {
         case sf::Event::LostFocus:break;
         case sf::Event::GainedFocus:break;
         case sf::Event::TextEntered:break;
-        case sf::Event::KeyPressed:break;
-        case sf::Event::KeyReleased:break;
+        case sf::Event::KeyPressed:  KeyPressed(event);  break;
+        case sf::Event::KeyReleased: KeyReleased(event); break;
         case sf::Event::MouseWheelMoved:break;
         case sf::Event::MouseWheelScrolled:break;
         case sf::Event::MouseButtonPressed:  MouseButtonPressed(event);  break;
@@ -96,41 +117,61 @@ void StateGame::Event(sf::Event *event) {
     }
 }
 
+void StateGame::KeyPressed(sf::Event *event) {
+
+}
+
+void StateGame::KeyReleased(sf::Event *event) {
+
+}
+
 void StateGame::MouseButtonPressed(sf::Event *event) {
-    if(event->MouseLeft){
-        first_mouse_release = false;
-        sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
-        mouse_last_pressed = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
+    sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
 
-        ObjectList.push_front(new ObjectNewParticleLine(mouse_pos));
-        mouse_pos -= sf::Vector2f(5.f, 5.f);
+    if (   (mouse_pos.x > global_game_resources->getLeft_side_bar_size())
+//        && (mouse_pos.x > global_game_resources->getRight_side_bar_size())
+            ){
+        if (event->mouseButton.button == sf::Mouse::Left) {
+            first_mouse_release = false;
+            mouse_last_pressed = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
 
-        ObjectList.push_front(new ObjectParticleBall(mouse_pos, 5, 2));
-        ObjectList.front()->getShape()->setFillColor(sf::Color::Blue);
+            ObjectList.push_front(new ObjectNewParticleLine(mouse_pos));
+            mouse_pos -= sf::Vector2f(5.f, 5.f);
 
+            ObjectList.push_front(new ObjectParticleBall(mouse_pos, 5, 2));
+            ObjectList.front()->getShape()->setFillColor(sf::Color::Blue);
+
+        }
+    } else {
+        for (auto* object : ObjectList){
+            if(object->IsClickable()){
+                ((ObjectClickable*)object)->checkClick(event);
+            }
+        }
     }
 }
 
 void StateGame::MouseButtonReleased(sf::Event *event) {
-    if(!first_mouse_release){
-
-        if(event->MouseLeft){
-            ObjectList.front()->setSpeed(mouse_last_pressed - sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow())));
-
-            ObjectInterface* objectDelete = nullptr;
-            bool finnished = true;
-            while(finnished){
-
-                for(auto &object : this->ObjectList){
-                    if(object->getShape_type() == ObjectInterface::ShapeType::shape_line){
-                        objectDelete = object;
-                        object->~ObjectInterface();
-                        break;
+    sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
+    if (   (mouse_pos.x > global_game_resources->getLeft_side_bar_size())
+//        && (mouse_pos.x > global_game_resources->getRight_side_bar_size())
+            ){
+        if(!first_mouse_release){
+            if(event->mouseButton.button == sf::Mouse::Left){
+                ObjectList.front()->setSpeed(mouse_last_pressed - mouse_pos);
+                ObjectInterface* objectDelete = nullptr;
+                bool finnished = true;
+                while(finnished){
+                    for(auto &object : this->ObjectList){
+                        if(object->getShape_type() == ObjectInterface::ShapeType::shape_line){
+                            objectDelete = object;
+                            object->~ObjectInterface();
+                            break;
+                        }
+                        finnished = false;
                     }
-                    finnished = false;
+                    ObjectList.remove(objectDelete);
                 }
-                ObjectList.remove(objectDelete);
-
             }
         }
     }

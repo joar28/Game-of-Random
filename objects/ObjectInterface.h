@@ -17,9 +17,13 @@ virtual void setTexture(sf::Texture*);
 
 class ObjectInterface{
 public:
-    ~ObjectInterface(){};
+    ~ObjectInterface();
     enum ShapeType{
-        shape_circle, shape_line
+        shape_not_set = -1,
+        shape_circle = 0,
+        shape_line,
+        shape_left_side_bar,
+        shape_button,
     };
 
     virtual void draw(sf::RenderWindow &) = 0;
@@ -39,15 +43,18 @@ public:
 
     void setPosition(const sf::Vector2f &position);
 
+    bool IsClickable() const;
+    void setClickable(bool isClickable);
+
 protected:
     void setShape_type(ObjectInterface::ShapeType shape_type);
 
 private:
-    ShapeType shape_type;
-    sf::Shape* shape;
+    ShapeType shape_type = shape_not_set;
+    sf::Shape* shape = nullptr;
     sf::Vector2f speed;
     sf::Vector2f size;
-
+    bool clickable = false;
 
 };
 

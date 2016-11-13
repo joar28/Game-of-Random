@@ -4,11 +4,23 @@
 
 #include "ObjectInterface.h"
 
+
+
 const sf::Vector2f ObjectInterface::getCenterPosition() const {
-    if(shape_type == shape_circle){
-        return shape->getPosition()+sf::Vector2f(((sf::CircleShape*)shape)->getRadius(), ((sf::CircleShape*)shape)->getRadius());
+    sf::Vector2f pos(-1.f, -1.f);
+
+    switch (shape_type){
+        case shape_not_set:break;
+        case shape_circle:{
+            float radius = ((sf::CircleShape*)shape)->getRadius();
+            pos = getPosition() - sf::Vector2f(radius, radius);
+        }break;
+        case shape_line: pos = shape->getPosition()+sf::Vector2f(getSize().x/2, getSize().x/2); break;
+        case shape_button:break;
+        case shape_left_side_bar:break;
     }
-    return shape->getPosition()+getSize();
+
+    return pos;
 }
 
 const sf::Vector2f &ObjectInterface::getSpeed() const {
@@ -50,4 +62,16 @@ void ObjectInterface::setShape_type(ObjectInterface::ShapeType shape_type) {
 
 ObjectInterface::ShapeType ObjectInterface::getShape_type() const {
     return shape_type;
+}
+
+ObjectInterface::~ObjectInterface() {
+    delete shape;
+}
+
+bool ObjectInterface::IsClickable() const {
+    return clickable;
+}
+
+void ObjectInterface::setClickable(bool isClickable) {
+    ObjectInterface::clickable = isClickable;
 }

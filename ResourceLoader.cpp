@@ -89,3 +89,19 @@ const sf::Font &ResourceLoader::getOpensans_regular() const {
 	return opensans_regular;
 }
 
+int ResourceLoader::getLeft_side_bar_size() const {
+    return left_side_bar_size;
+}
+
+void ResourceLoader::setLeft_side_bar_size(int left_side_bar) {
+    ResourceLoader::left_side_bar_size = left_side_bar;
+}
+
+int ResourceLoader::getRight_side_bar_size() const {
+    return right_side_bar_size;
+}
+
+void ResourceLoader::setRight_side_bar_size(int right_side_bar) {
+    ResourceLoader::right_side_bar_size = right_side_bar;
+}
+

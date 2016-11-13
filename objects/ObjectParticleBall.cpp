@@ -12,28 +12,26 @@ ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius, int 
     setShape(new sf::CircleShape(radius));
     ((sf::CircleShape*)getShape())->setPosition(position);
     setShape_type(shape_circle);
-
-    behavior = 1;
+    behavior = type;
 }
 
 void ObjectParticleBall::draw(sf::RenderWindow &window) {
     window.draw(*getShape());
-
 }
 
 void ObjectParticleBall::process(sf::Time time) {
     getShape()->move(getSpeed()*time.asSeconds());
 
     // Check collision of right screen edge
-    if(((sf::CircleShape*)getShape())->getPosition().x + (((sf::CircleShape*)getShape())->getRadius()*2) > global_game_resources->getWindow()->getSize().x){
+    if(((sf::CircleShape*)getShape())->getPosition().x + (((sf::CircleShape*)getShape())->getRadius()*2) > global_game_resources->getWindow()->getSize().x - global_game_resources->getRight_side_bar_size()){
         setSpeed(sf::Vector2f(getSpeed().x*-1, getSpeed().y));
-        setPosition(sf::Vector2f(global_game_resources->getWindow()->getSize().x-(((sf::CircleShape*)getShape())->getRadius()*2), getPosition().y));
+        setPosition(sf::Vector2f(global_game_resources->getWindow()->getSize().x-(((sf::CircleShape*)getShape())->getRadius()*2), getPosition().y - global_game_resources->getRight_side_bar_size()));
     }
 
     // Check collision of left screen edge
-    if (getPosition().x < 0){
+    if (getPosition().x < 0+global_game_resources->getLeft_side_bar_size()){
         setSpeed(sf::Vector2f(getSpeed().x*-1, getSpeed().y));
-        setPosition(sf::Vector2f(0,getPosition().y));
+        setPosition(sf::Vector2f(global_game_resources->getLeft_side_bar_size(),getPosition().y));
     }
 
     // Check collision of bottom screen edge
@@ -105,15 +103,12 @@ void ObjectParticleBall::type_2(ObjectInterface *test_object) {
         // sf::Vector2f this_pos = getCenterPosition();
         sf::Vector2f this_speed = getSpeed();
 
-
-
         // Speed modifier
         sf::Vector2f speed_modifier = sf::Vector2f(this_speed.x/100, this_speed.y/100);
 
         test_object->setSpeed(test_speed+speed_modifier);
 
         //setSpeed(getSpeed()-speed_modifier);
-
     }
 }
 

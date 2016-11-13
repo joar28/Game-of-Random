@@ -24,3 +24,7 @@ void ObjectNewParticleLine::process(sf::Time time) {
 void ObjectNewParticleLine::proximityControl(ObjectInterface *test_object) {
 
 }
+
+ObjectNewParticleLine::~ObjectNewParticleLine() {
+
+}

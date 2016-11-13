@@ -54,7 +54,7 @@ void Game::Run() {
             gameStateStack.top()->Event(&event);
             // Close window: exit
             if (event.type == sf::Event::Closed) {
-                std::cout << "Window X close button pressed." << std::endl;
+                std::cout << "Window X close Button pressed." << std::endl;
                 while(gameStateStack.size()){
                     delete(gameStateStack.top());
                     gameStateStack.pop();
