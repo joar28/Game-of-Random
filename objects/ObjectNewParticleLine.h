@@ -10,10 +10,19 @@
 
 class ObjectNewParticleLine : public ObjectInterface{
 public:
+    /**
+     * Constructor for Particle line
+     * @param startpos Stratposition for line
+     * @return None
+     */
     ObjectNewParticleLine(sf::Vector2f startpos);
 
     virtual void draw(sf::RenderWindow &window) override;
 
+    /**
+     * Updates position in last end to line so it follws mouse pointer
+     * @param DeltaTime Time since last game tick
+     */
     virtual void process(sf::Time DeltaTime) override;
 
     virtual void proximityControl(ObjectInterface *test_object) override;

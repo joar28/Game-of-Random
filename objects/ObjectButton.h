@@ -11,6 +11,13 @@
 
 class ObjectButton : public ObjectClickable{
 public:
+    /**
+     * Button constructor.
+     * @param position Position of button
+     * @param text_s Text to be displayed on button
+     * @param cb Pointer to callback function/method
+     * @return None
+     */
     ObjectButton(const sf::Vector2f &position, std::string text_s, std::function<int()> cb);
 
     virtual void draw(sf::RenderWindow &window) override;

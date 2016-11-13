@@ -10,7 +10,17 @@
 
 class ObjectClickable : public ObjectInterface{
 public:
+    /**
+     * Constructor for clickable object
+     * @return None
+     */
     ObjectClickable();
+
+    /**
+     * This method checks if mouse pointer is hovering over itself,
+     * and handles if it has been clicked.
+     * @param event contains click event
+     */
     virtual void checkClick(sf::Event *event) = 0;
 };
 

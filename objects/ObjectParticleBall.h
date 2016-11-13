@@ -12,7 +12,8 @@ class ObjectParticleBall : public ObjectInterface{
 public:
 
     /**
-     * @param position Startposition of particle ball
+     * Constructor for particle ball
+     * @param position Start position of particle ball
      * @param radius Size of particle ball
      * @param type Integer to choose behavior type of particle
      * @return void
@@ -25,13 +26,34 @@ public:
     virtual void process(sf::Time DeltaTime) override;
 
 public:
+    /**
+     * Returns radius of particel object
+     * @return Radius
+     */
     float getRadius() const;
 
+    /**
+     * Set radius of particel object
+     * @param radius Radius
+     */
     void setRadius(float radius);
 
 private:
+    /**
+     * Proximity behavior type 1
+     * Will make a swarm
+     * @param test_object Object to priximity test
+     */
     void type_1(ObjectInterface *test_object);
+
+    /**
+     * Proximity behavior type 2
+     * Will make a swarm
+     * @param test_object Object to priximity test
+     */
     void type_2(ObjectInterface *test_object);
+
+    /// Contains behavior type number
     int behavior;
 
 };

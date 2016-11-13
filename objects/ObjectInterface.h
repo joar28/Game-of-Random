@@ -17,17 +17,22 @@ virtual void setTexture(sf::Texture*);
 
 class ObjectInterface{
 public:
+
+
+    /**
+     * Object interface deconstructor
+     */
     ~ObjectInterface();
 
     /**
      * Types of shape
      */
     enum ShapeType{
-        shape_not_set = -1,
-        shape_circle = 0,
-        shape_line,
-        shape_left_side_bar,
-        shape_button,
+        shape_not_set = -1, ///< Default shape if shapetype is not updated (Should not happen)
+        shape_circle = 0,   ///< If shape is circle
+        shape_line,         ///< If shape is line
+        shape_left_side_bar,///< If shape is sidebar
+        shape_button,       ///< If shape is button
     };
 
     /**
@@ -38,7 +43,7 @@ public:
 
     /**
      * Executes game tick logic
-     * @param DeltaTime
+     * @param DeltaTime Time since last game tick
      */
     virtual void process(sf::Time DeltaTime) = 0;
 
@@ -60,7 +65,10 @@ public:
      */
     const sf::Vector2f &getSpeed() const;
 
-
+    /**
+     * Returns size of object
+     * @return size
+     */
     const sf::Vector2f &getSize() const;
 
     /**

@@ -6,15 +6,14 @@
 #include <iostream>
 
 
-ResourceLoader::ResourceLoader() {}
 
 bool ResourceLoader::LoadResources() {
-	if(false == LoadFonts()){
+	if(!LoadFonts()){
 		std::cout << "Error! Loading fonts. " << std::endl;
 		return false;
 	}
-	if(false == LoadSounds()){
-		std::cout << "Error! Loading fonts. " << std::endl;
+	if(!LoadSounds()){
+		std::cout << "Error! Loading sounds. " << std::endl;
 		return false;
 	}
 

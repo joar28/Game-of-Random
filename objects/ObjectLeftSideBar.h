@@ -11,6 +11,11 @@
 
 class ObjectLeftSideBar : public ObjectInterface{
 public:
+    /**
+     * Constructor for side bar
+     * @param width Set width of left sidebar
+     * @return None
+     */
     ObjectLeftSideBar(int width);
     virtual void draw(sf::RenderWindow &window) override;
     virtual void process(sf::Time DeltaTime) override;

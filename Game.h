@@ -12,13 +12,18 @@
 #include "states/StateInterface.h"
 #include "ResourceLoader.h"
 
-// /Main game class.
+/// Main game class.
 class Game {
   public:
-    // /Initialize game stuff.
+    /**
+     *
+     * @return status of init, true if success
+     */
     bool Init();
 
-    // /Main game loop
+    /**
+     * Main game loop, will run til game exits
+     */
     void Run();
 
   private:

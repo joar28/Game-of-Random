@@ -160,21 +160,21 @@ void StateGame::MouseButtonReleased(sf::Event *event) {
         if(!first_mouse_release){
             if(event->mouseButton.button == sf::Mouse::Left){
                 ObjectList.front()->setSpeed(mouse_last_pressed - mouse_pos);
-                ObjectInterface* objectDelete = nullptr;
-                bool finnished = true;
-                while(finnished){
-                    for(auto &object : this->ObjectList){
-                        if(object->getShape_type() == ObjectInterface::ShapeType::shape_line){
-                            objectDelete = object;
-                            object->~ObjectInterface();
-                            break;
-                        }
-                        finnished = false;
-                    }
-                    ObjectList.remove(objectDelete);
-                }
             }
         }
+    }
+    ObjectInterface* objectDelete = nullptr;
+    bool finnished = true;
+    while(finnished){
+        for(auto &object : this->ObjectList){
+            if(object->getShape_type() == ObjectInterface::ShapeType::shape_line){
+                objectDelete = object;
+                object->~ObjectInterface();
+                break;
+            }
+            finnished = false;
+        }
+        ObjectList.remove(objectDelete);
     }
 }
 
