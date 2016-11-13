@@ -11,13 +11,18 @@
 class ObjectParticleBall : public ObjectInterface{
 public:
 
-
+    /**
+     * @param position Startposition of particle ball
+     * @param radius Size of particle ball
+     * @param type Integer to choose behavior type of particle
+     * @return void
+     */
     ObjectParticleBall(sf::Vector2f position, float radius, int type);
 
-    virtual void proximityControl(ObjectInterface *test_object) override;
 
+    virtual void proximityControl(ObjectInterface *test_object) override;
     virtual void draw(sf::RenderWindow &window) override;
-    virtual void process(sf::Time time) override;
+    virtual void process(sf::Time DeltaTime) override;
 
 public:
     float getRadius() const;

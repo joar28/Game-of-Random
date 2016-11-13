@@ -14,7 +14,7 @@
 StateGame::StateGame() {
     int speed = 5;
     ObjectList.push_front(new ObjectLeftSideBar(global_game_resources->getLeft_side_bar_size()));
-    add_button("Typ", std::bind(&StateGame::callback_typ, this));
+    add_button("Typ", std::bind(&StateGame::callback_type_particle, this));
 //    add_button("asd");
 //    add_button("czxcv");
     for (int i = 0; i < 10; i++){
@@ -59,9 +59,10 @@ void StateGame::add_button(std::string text, std::function<int()> cb) {
     next_button_pos += 40;
 }
 
-int StateGame::callback_typ(){
-    std::cout << "Typ button pressed" << std::endl;
-    return 0;
+int StateGame::callback_type_particle(){
+    std::cout << "Typ button pressed " << std::endl;
+    next_particle_type++;
+    return next_particle_type;
 }
 
 void StateGame::Draw(sf::RenderWindow &window) {
@@ -90,30 +91,30 @@ StateInterface::StateSwitcherData *StateGame::NextState() {
 void StateGame::Event(sf::Event *event) {
 
     switch (event->type){
-        case sf::Event::Closed:break;
-        case sf::Event::Resized:break;
-        case sf::Event::LostFocus:break;
-        case sf::Event::GainedFocus:break;
-        case sf::Event::TextEntered:break;
-        case sf::Event::KeyPressed:  KeyPressed(event);  break;
-        case sf::Event::KeyReleased: KeyReleased(event); break;
-        case sf::Event::MouseWheelMoved:break;
-        case sf::Event::MouseWheelScrolled:break;
-        case sf::Event::MouseButtonPressed:  MouseButtonPressed(event);  break;
-        case sf::Event::MouseButtonReleased: MouseButtonReleased(event); break;
-        case sf::Event::MouseMoved:break;
-        case sf::Event::MouseEntered:break;
-        case sf::Event::MouseLeft:break;
-        case sf::Event::JoystickButtonPressed:break;
-        case sf::Event::JoystickButtonReleased:break;
-        case sf::Event::JoystickMoved:break;
-        case sf::Event::JoystickConnected:break;
-        case sf::Event::JoystickDisconnected:break;
-        case sf::Event::TouchBegan:break;
-        case sf::Event::TouchMoved:break;
-        case sf::Event::TouchEnded:break;
-        case sf::Event::SensorChanged:break;
-        case sf::Event::Count:break;
+        case sf::Event::Closed:                                             break;
+        case sf::Event::Resized:                                            break;
+        case sf::Event::LostFocus:                                          break;
+        case sf::Event::GainedFocus:                                        break;
+        case sf::Event::TextEntered:                                        break;
+        case sf::Event::KeyPressed:             KeyPressed(event);          break;
+        case sf::Event::KeyReleased:            KeyReleased(event);         break;
+        case sf::Event::MouseWheelMoved:                                    break;
+        case sf::Event::MouseWheelScrolled:                                 break;
+        case sf::Event::MouseButtonPressed:     MouseButtonPressed(event);  break;
+        case sf::Event::MouseButtonReleased:    MouseButtonReleased(event); break;
+        case sf::Event::MouseMoved:                                         break;
+        case sf::Event::MouseEntered:                                       break;
+        case sf::Event::MouseLeft:                                          break;
+        case sf::Event::JoystickButtonPressed:                              break;
+        case sf::Event::JoystickButtonReleased:                             break;
+        case sf::Event::JoystickMoved:                                      break;
+        case sf::Event::JoystickConnected:                                  break;
+        case sf::Event::JoystickDisconnected:                               break;
+        case sf::Event::TouchBegan:                                         break;
+        case sf::Event::TouchMoved:                                         break;
+        case sf::Event::TouchEnded:                                         break;
+        case sf::Event::SensorChanged:                                      break;
+        case sf::Event::Count:                                              break;
     }
 }
 
@@ -176,3 +177,4 @@ void StateGame::MouseButtonReleased(sf::Event *event) {
         }
     }
 }
+

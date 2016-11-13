@@ -13,7 +13,7 @@ class ObjectLeftSideBar : public ObjectInterface{
 public:
     ObjectLeftSideBar(int width);
     virtual void draw(sf::RenderWindow &window) override;
-    virtual void process(sf::Time time) override;
+    virtual void process(sf::Time DeltaTime) override;
     virtual void proximityControl(ObjectInterface *test_object) override;
 };
 

@@ -16,7 +16,7 @@ void ObjectNewParticleLine::draw(sf::RenderWindow &window) {
     window.draw(line, 2, sf::Lines);
 }
 
-void ObjectNewParticleLine::process(sf::Time time) {
+void ObjectNewParticleLine::process(sf::Time DeltaTime) {
     line[1].position = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
 
 }
@@ -25,6 +25,4 @@ void ObjectNewParticleLine::proximityControl(ObjectInterface *test_object) {
 
 }
 
-ObjectNewParticleLine::~ObjectNewParticleLine() {
 
-}

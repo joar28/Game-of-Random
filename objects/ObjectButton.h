@@ -11,7 +11,7 @@
 
 class ObjectButton : public ObjectClickable{
 public:
-    ObjectButton(const sf::Vector2f &position, std::string text_string, std::function<int()> cb);
+    ObjectButton(const sf::Vector2f &position, std::string text_s, std::function<int()> cb);
 
     virtual void draw(sf::RenderWindow &window) override;
 
@@ -22,10 +22,11 @@ public:
     virtual void checkClick(sf::Event *event) override;
 
 private:
+    std::string text_string;
     sf::Text text;
     sf::Vector2f position;
     sf::RectangleShape background;
-    std::function<void()> callback;
+    std::function<int()> callback;
 };
 
 

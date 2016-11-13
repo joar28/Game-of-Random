@@ -14,11 +14,10 @@ public:
 
     virtual void draw(sf::RenderWindow &window) override;
 
-    virtual void process(sf::Time time) override;
+    virtual void process(sf::Time DeltaTime) override;
 
     virtual void proximityControl(ObjectInterface *test_object) override;
 
-    virtual ~ObjectNewParticleLine();
 
 private:
     sf::Vertex line[2];

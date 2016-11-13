@@ -16,7 +16,7 @@ void ObjectLeftSideBar::draw(sf::RenderWindow &window) {
     window.draw(*getShape());
 }
 
-void ObjectLeftSideBar::process(sf::Time time) {}
+void ObjectLeftSideBar::process(sf::Time DeltaTime) {}
 void ObjectLeftSideBar::proximityControl(ObjectInterface *test_object) {}
 
 

@@ -2,10 +2,11 @@
 // Created by joar on 11/13/16.
 //
 
+#include <iostream>
 #include "ObjectButton.h"
 #include "../globals.h"
 
-ObjectButton::ObjectButton(const sf::Vector2f &position, std::string text_string, std::function<int()> cb) {
+ObjectButton::ObjectButton(const sf::Vector2f &position, std::string text_s, std::function<int()> cb) : text_string(text_s) {
     callback = cb;
     setShape_type(ObjectInterface::ShapeType::shape_button);
 
@@ -42,7 +43,8 @@ void ObjectButton::proximityControl(ObjectInterface *test_object) {
 void ObjectButton::checkClick(sf::Event *event) {
     sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(*global_game_resources->getWindow()));
     if((background.getGlobalBounds().contains(mouse_pos))){
-        callback();
+        int number = callback();
+        std::cout << number << std::endl;
     }
 }
 

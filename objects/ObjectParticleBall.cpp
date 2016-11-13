@@ -19,8 +19,8 @@ void ObjectParticleBall::draw(sf::RenderWindow &window) {
     window.draw(*getShape());
 }
 
-void ObjectParticleBall::process(sf::Time time) {
-    getShape()->move(getSpeed()*time.asSeconds());
+void ObjectParticleBall::process(sf::Time DeltaTime) {
+    getShape()->move(getSpeed()*DeltaTime.asSeconds());
 
     // Check collision of right screen edge
     if(((sf::CircleShape*)getShape())->getPosition().x + (((sf::CircleShape*)getShape())->getRadius()*2) > global_game_resources->getWindow()->getSize().x - global_game_resources->getRight_side_bar_size()){
