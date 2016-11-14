@@ -56,6 +56,22 @@ private:
     /// Contains behavior type number
     int behavior;
 
+    void type_3(ObjectInterface *test_object);
+    float crowd_death_level;
+    bool is_alive = true;
+    sf::Clock death_fade;
+    sf::Clock spawn_child;
+    int spawn_child_rate;
+    bool give_birth = false;
+public:
+
+    bool isIs_alive() const;
+
+    void setIs_alive(bool is_alive);
+
+    bool isGive_birth() const;
+
+    void setGive_birth(bool give_birth);
 };
 
 

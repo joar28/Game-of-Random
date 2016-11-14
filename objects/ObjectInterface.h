@@ -146,6 +146,11 @@ private:
 
     /// True if object should be clickable
     bool clickable = false;
+    bool marked_for_delete = false;
+public:
+    bool isMarked_for_delete() const;
+
+    void setMarked_for_delete(bool marked_for_delete);
 
 };
 

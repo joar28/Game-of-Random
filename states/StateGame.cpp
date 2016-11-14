@@ -17,12 +17,12 @@ StateGame::StateGame() {
     add_button("Typ", std::bind(&StateGame::callback_type_particle, this));
 //    add_button("asd");
 //    add_button("czxcv");
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 0; i++){
         ObjectList.push_front(new ObjectParticleBall(
                 sf::Vector2f(
                         rand() % global_game_resources->getWindow()->getSize().x - 10,
                         rand() % global_game_resources->getWindow()->getSize().y - 10),
-                5, 2));
+                5, 3));
         ObjectList.front()->getShape()->setFillColor(sf::Color::Green);
         ObjectList.front()->setSpeed(sf::Vector2f((rand()%speed*2)-speed,(rand()%speed*2)-speed));
 //        ObjectList.front()->setSpeed(sf::Vector2f(1,1));
@@ -82,6 +82,40 @@ void StateGame::Process(sf::Time DeltaTime) {
     for(auto &object : this->ObjectList){
         object->process(DeltaTime);
     }
+
+    // Check if objects is marked for delete
+    ObjectInterface* objectDelete = nullptr;
+    bool finnished  = true;
+    while(finnished){
+        for(auto &object : this->ObjectList){
+            if(object->isMarked_for_delete()){
+                objectDelete = object;
+                object->~ObjectInterface();
+                break;
+            }
+            finnished = false;
+        }
+        ObjectList.remove(objectDelete);
+    }
+
+    for(auto &object : this->ObjectList){
+        if(object->getShape_type() == ObjectInterface::ShapeType::shape_circle){
+            if(((ObjectParticleBall*)object)->isGive_birth()){
+                ((ObjectParticleBall*)object)->setGive_birth(false);
+                sf::Vector2f child_pos = object->getPosition();
+                child_pos.x += 100 - (rand() % 200);
+                child_pos.y += 100 - (rand() % 200);
+                ObjectList.push_front(new ObjectParticleBall(
+                child_pos,
+                5, 3));
+        ObjectList.front()->getShape()->setFillColor(sf::Color::Red);
+        ObjectList.front()->setSpeed(object->getSpeed());
+            }
+        }
+    }
+
+
+    std::cout << ObjectList.size() << std::endl;
 }
 
 StateInterface::StateSwitcherData *StateGame::NextState() {
@@ -139,7 +173,7 @@ void StateGame::MouseButtonPressed(sf::Event *event) {
             ObjectList.push_front(new ObjectNewParticleLine(mouse_pos));
             mouse_pos -= sf::Vector2f(5.f, 5.f);
 
-            ObjectList.push_front(new ObjectParticleBall(mouse_pos, 5, 2));
+            ObjectList.push_front(new ObjectParticleBall(mouse_pos, 5, 3));
             ObjectList.front()->getShape()->setFillColor(sf::Color::Blue);
 
         }

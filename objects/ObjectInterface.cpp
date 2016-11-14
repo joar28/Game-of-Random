@@ -75,3 +75,11 @@ bool ObjectInterface::IsClickable() const {
 void ObjectInterface::setClickable(bool isClickable) {
     ObjectInterface::clickable = isClickable;
 }
+
+bool ObjectInterface::isMarked_for_delete() const {
+    return marked_for_delete;
+}
+
+void ObjectInterface::setMarked_for_delete(bool marked_for_delete) {
+    ObjectInterface::marked_for_delete = marked_for_delete;
+}
