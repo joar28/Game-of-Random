@@ -1,10 +1,22 @@
 //
-// Created by joar on 11/5/16.
-//
 
 #include "ObjectInterface.h"
 
 
+
+//
+// Created by joar on 11/5/16.
+ObjectInterface::ObjectInterface(
+        ObjectInterface::ShapeType shape_type,
+        ObjectInterface::DerivedClassType derivedClass,
+        bool clickable)
+        :
+        shape_type(shape_type),
+        derivedClass(derivedClass),
+        clickable(clickable)
+{
+
+}
 
 const sf::Vector2f ObjectInterface::getCenterPosition() const {
     sf::Vector2f pos(-1.f, -1.f);
@@ -16,8 +28,7 @@ const sf::Vector2f ObjectInterface::getCenterPosition() const {
             pos = getPosition() - sf::Vector2f(radius, radius);
         }break;
         case shape_line: pos = shape->getPosition()+sf::Vector2f(getSize().x/2, getSize().x/2); break;
-        case shape_button:break;
-        case shape_left_side_bar:break;
+        case shape_rectangle: break; //todo implement rectangle position
     }
 
     return pos;
@@ -64,9 +75,17 @@ ObjectInterface::ShapeType ObjectInterface::getShape_type() const {
     return shape_type;
 }
 
+
+
+
+
 ObjectInterface::~ObjectInterface() {
     delete shape;
 }
+
+
+
+
 
 bool ObjectInterface::IsClickable() const {
     return clickable;
@@ -82,4 +101,8 @@ bool ObjectInterface::isMarked_for_delete() const {
 
 void ObjectInterface::setMarked_for_delete(bool marked_for_delete) {
     ObjectInterface::marked_for_delete = marked_for_delete;
+}
+
+ObjectInterface::DerivedClassType ObjectInterface::getDerivedClass() const {
+    return derivedClass;
 }

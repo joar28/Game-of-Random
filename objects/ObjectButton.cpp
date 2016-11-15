@@ -6,9 +6,15 @@
 #include "ObjectButton.h"
 #include "../globals.h"
 
-ObjectButton::ObjectButton(const sf::Vector2f &position, std::string text_s, std::function<int()> cb) : text_string(text_s) {
+ObjectButton::ObjectButton(const sf::Vector2f &position, std::string text_s, std::function<int()> cb)
+        :
+        ObjectClickable(
+                ObjectInterface::ShapeType::shape_rectangle,
+                DerivedClassType::object_button,
+                true),
+        text_string(text_s)
+{
     callback = cb;
-    setShape_type(ObjectInterface::ShapeType::shape_button);
 
     background.setSize(sf::Vector2f(80,30));
     background.setPosition(position);
@@ -46,5 +52,9 @@ void ObjectButton::checkClick(sf::Event *event) {
         int number = callback();
         std::cout << number << std::endl;
     }
+}
+
+ObjectButton::~ObjectButton() {
+
 }
 

@@ -5,7 +5,7 @@
 #include "ObjectNewParticleLine.h"
 #include "../globals.h"
 
-ObjectNewParticleLine::ObjectNewParticleLine(sf::Vector2f startpos) {
+ObjectNewParticleLine::ObjectNewParticleLine(sf::Vector2f startpos) : ObjectInterface(ShapeType::shape_line, DerivedClassType::object_new_particle_line, false){
     setShape_type(ObjectInterface::ShapeType::shape_line);
 
     line[0] = sf::Vertex(startpos, sf::Color::Red);
@@ -23,6 +23,9 @@ void ObjectNewParticleLine::process(sf::Time DeltaTime) {
 
 void ObjectNewParticleLine::proximityControl(ObjectInterface *test_object) {
 
+}
+
+ObjectNewParticleLine::~ObjectNewParticleLine() {
 }
 
 

@@ -4,6 +4,7 @@
 
 #include "ObjectClickable.h"
 
-ObjectClickable::ObjectClickable() {
-    setClickable(true);
-}
+ObjectClickable::ObjectClickable(ObjectInterface::ShapeType shape_type,
+                                 ObjectInterface::DerivedClassType derivedClass,
+                                 bool clickable)
+        : ObjectInterface(shape_type, derivedClass, clickable) {}

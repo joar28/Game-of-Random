@@ -14,7 +14,8 @@ public:
      * Constructor for clickable object
      * @return None
      */
-    ObjectClickable();
+    //ShapeType shape_type, DerivedClassType derivedClass, bool clickable
+    ObjectClickable(ShapeType shape_type, DerivedClassType derivedClass, bool clickable);
 
     /**
      * This method checks if mouse pointer is hovering over itself,

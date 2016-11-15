@@ -8,7 +8,10 @@
 
 
 
-ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius, int type) {
+ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius, int type)
+        :
+        ObjectInterface(ShapeType::shape_circle, DerivedClassType::object_particle_ball, false)
+{
     setShape(new sf::CircleShape(radius));
     ((sf::CircleShape*)getShape())->setPosition(position);
     setShape_type(shape_circle);
@@ -16,6 +19,7 @@ ObjectParticleBall::ObjectParticleBall(sf::Vector2f position, float radius, int 
     crowd_death_level = 0;
     spawn_child_rate = 1000 + (rand()%5000);
 }
+
 
 void ObjectParticleBall::draw(sf::RenderWindow &window) {
     window.draw(*getShape());
@@ -66,12 +70,12 @@ void ObjectParticleBall::process(sf::Time DeltaTime) {
     }
 
     if(behavior == 3){
-        if((crowd_death_level > 400) && is_alive){
+        if((crowd_death_level > 140) && is_alive){
             this->getShape()->setFillColor(sf::Color::Yellow);
             setIs_alive(false);
             death_fade.restart();
         }
-        if((crowd_death_level < 100 && is_alive) ){
+        if((crowd_death_level < 150 && is_alive) ){
             if(spawn_child.getElapsedTime().asMilliseconds() > spawn_child_rate){
                 setGive_birth(true);
                 spawn_child.restart();
@@ -189,3 +193,21 @@ bool ObjectParticleBall::isGive_birth() const {
 void ObjectParticleBall::setGive_birth(bool give_birth) {
     ObjectParticleBall::give_birth = give_birth;
 }
+
+
+
+
+ObjectParticleBall::~ObjectParticleBall() {
+    delete((sf::CircleShape*)getShape());
+    setShape(nullptr);
+}
+
+
+
+
+
+
+//ObjectParticleBall::~ObjectParticleBall() {
+//    delete((sf::CircleShape*)getShape());
+//}
+

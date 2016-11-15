@@ -20,6 +20,8 @@ public:
      */
     ObjectButton(const sf::Vector2f &position, std::string text_s, std::function<int()> cb);
 
+    virtual ~ObjectButton();
+
     virtual void draw(sf::RenderWindow &window) override;
 
     virtual void process(sf::Time time) override;

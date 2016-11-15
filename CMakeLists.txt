@@ -27,4 +27,5 @@ target_link_libraries (game_of_random
         sfml-system
         sfml-window
         sfml-graphics
-        sfml-audio)
+        sfml-audio
+        )

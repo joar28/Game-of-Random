@@ -18,12 +18,6 @@ virtual void setTexture(sf::Texture*);
 class ObjectInterface{
 public:
 
-
-    /**
-     * Object interface deconstructor
-     */
-    ~ObjectInterface();
-
     /**
      * Types of shape
      */
@@ -31,9 +25,21 @@ public:
         shape_not_set = -1, ///< Default shape if shapetype is not updated (Should not happen)
         shape_circle = 0,   ///< If shape is circle
         shape_line,         ///< If shape is line
-        shape_left_side_bar,///< If shape is sidebar
-        shape_button,       ///< If shape is button
+        shape_rectangle,    ///< If shape is rectangle
     };
+
+/**
+     * Types of derived class
+     */
+    enum DerivedClassType{
+        object_type_not_set = -1,   ///< If objectType is not set (Should not happen)
+        object_button       = 0,    ///< If objectType is button
+        object_left_side_bar,       ///< If objectType is left side bar
+        object_new_particle_line,   ///< If objectType is new particle line
+        object_particle_ball,       ///< If objectType is \ref ObjectParticleBall
+    };
+
+    ObjectInterface(ShapeType shape_type, DerivedClassType derivedClass, bool clickable);
 
     /**
      * Draw self function.
@@ -125,6 +131,13 @@ public:
      */
     void setClickable(bool isClickable);
 
+    /**
+     * Will return which derived class type
+     * @return DerivedClassType enum
+     */
+    DerivedClassType getDerivedClass() const;
+
+
 protected:
     /**
      * Set shape type
@@ -132,9 +145,17 @@ protected:
      */
     void setShape_type(ObjectInterface::ShapeType shape_type);
 
+
+    /**
+     * Object interface deconstructor
+     */
+    ~ObjectInterface();
 private:
     /// Contains shape type
     ShapeType shape_type = shape_not_set;
+
+    /// Contains shape type
+    DerivedClassType derivedClass = object_type_not_set;
 
     /// Pointer to drawable shape
     sf::Shape* shape = nullptr;

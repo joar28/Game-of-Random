@@ -20,12 +20,14 @@ public:
      */
     ObjectParticleBall(sf::Vector2f position, float radius, int type);
 
+    virtual ~ObjectParticleBall();
 
     virtual void proximityControl(ObjectInterface *test_object) override;
     virtual void draw(sf::RenderWindow &window) override;
-    virtual void process(sf::Time DeltaTime) override;
 
+    virtual void process(sf::Time DeltaTime) override;
 public:
+
     /**
      * Returns radius of particel object
      * @return Radius
@@ -37,8 +39,8 @@ public:
      * @param radius Radius
      */
     void setRadius(float radius);
-
 private:
+
     /**
      * Proximity behavior type 1
      * Will make a swarm
@@ -55,7 +57,6 @@ private:
 
     /// Contains behavior type number
     int behavior;
-
     void type_3(ObjectInterface *test_object);
     float crowd_death_level;
     bool is_alive = true;
@@ -63,6 +64,7 @@ private:
     sf::Clock spawn_child;
     int spawn_child_rate;
     bool give_birth = false;
+
 public:
 
     bool isIs_alive() const;

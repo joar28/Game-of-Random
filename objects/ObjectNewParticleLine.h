@@ -17,6 +17,8 @@ public:
      */
     ObjectNewParticleLine(sf::Vector2f startpos);
 
+    virtual ~ObjectNewParticleLine();
+
     virtual void draw(sf::RenderWindow &window) override;
 
     /**
