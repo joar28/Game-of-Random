@@ -12,7 +12,7 @@ class StateMainMenu : public StateInterface{
 
     virtual void Draw(sf::RenderWindow &window) override;
     virtual void Process(sf::Time DeltaTime) override;
-    virtual StateInterface::StateSwitcherData * NextState() override;
+    virtual StateInterface::StateSwitcherData NextState() override;
 
     virtual void Event(sf::Event *event) override;
 

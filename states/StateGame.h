@@ -19,7 +19,7 @@ public:
 
     virtual void Process(sf::Time DeltaTime) override;
 
-    virtual StateSwitcherData *NextState() override;
+    virtual StateSwitcherData NextState() override;
 
     virtual void Event(sf::Event *event) override;
 

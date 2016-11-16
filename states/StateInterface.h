@@ -53,7 +53,7 @@ public:
      * it does not change state.
      * @return  pointer to StateSwitcherData struct
      */
-    virtual StateInterface::StateSwitcherData * NextState() = 0;
+    virtual StateInterface::StateSwitcherData NextState() = 0;
 
     /**
      * Takes in all events from SFML

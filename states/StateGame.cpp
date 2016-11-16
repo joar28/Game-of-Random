@@ -138,8 +138,8 @@ void StateGame::Process(sf::Time DeltaTime) {
 //    std::cout << ObjectList.size() << std::endl;
 }
 
-StateInterface::StateSwitcherData *StateGame::NextState() {
-    return &next_state_data;
+StateInterface::StateSwitcherData StateGame::NextState() {
+    return next_state_data;
 }
 
 void StateGame::Event(sf::Event *event) {
@@ -173,7 +173,10 @@ void StateGame::Event(sf::Event *event) {
 }
 
 void StateGame::KeyPressed(sf::Event *event) {
-
+    if (event->key.code == sf::Keyboard::Escape) {
+        this->next_state_data.next_state_ptr = nullptr;
+        //window.close();
+    }
 }
 
 void StateGame::KeyReleased(sf::Event *event) {

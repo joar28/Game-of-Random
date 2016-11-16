@@ -26,7 +26,9 @@ class Game {
      */
     void Run();
 
-  private:
+    virtual ~Game();
+
+private:
     StateInterface::StateSwitcherData next_state_data;
 //    StateInterface *next_state_data;
     sf::RenderWindow window;

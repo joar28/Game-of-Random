@@ -16,7 +16,7 @@ class StateInitLoad : public StateInterface{
     StateInitLoad();
     virtual void Draw(sf::RenderWindow &window) override;
     virtual void Process(sf::Time DeltaTime) override;
-    virtual StateSwitcherData * NextState() override;
+    virtual StateSwitcherData NextState() override;
 
     virtual void Event(sf::Event *event) override;
 

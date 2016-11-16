@@ -23,12 +23,12 @@ void StateInitLoad::Process(sf::Time DeltaTime) {
 
 }
 
-StateInterface::StateSwitcherData * StateInitLoad::NextState() {
+StateInterface::StateSwitcherData StateInitLoad::NextState() {
     if (Clock.getElapsedTime().asSeconds() >= 0.5){
         next_state_data.next_state_ptr = new StateMainMenu();
         next_state_data.delete_self = true;
     }
-    return &next_state_data;
+    return next_state_data;
 }
 
 

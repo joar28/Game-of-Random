@@ -39,8 +39,17 @@ void StateMainMenu::Draw(sf::RenderWindow &window) {
 void StateMainMenu::Process(sf::Time DeltaTime) {
 
 }
-StateInterface::StateSwitcherData * StateMainMenu::NextState() {
-    return &next_state_data;
+StateInterface::StateSwitcherData StateMainMenu::NextState() {
+    if (next_state_data.next_state_ptr != this){
+        StateInterface::StateSwitcherData tmp = next_state_data;
+        next_state_data.next_state_ptr = this;
+        for(auto text : menuText){
+                    text.first->setColor(sf::Color::White);
+                    text.first->setCharacterSize(30);
+            }
+        return tmp;
+    }
+    return next_state_data;
 }
 
 void StateMainMenu::Event(sf::Event *event) {
